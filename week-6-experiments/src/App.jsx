@@ -1,31 +1,45 @@
-import React, { useState } from "react"
+/* eslint-disable react/prop-types */
 
+
+import { useState } from "react"
+
+let counter = 4;
 function App() {
-  const [title, setTitle] = useState("my name is nisha");
+  const [todos, setTodos] = useState([ {
+    id: 1, 
+    title: "Title 1",
+    description: "desc 1"
+  }, {
+    id: 2,
+    title: "Title 2",
+    description: "desc 2"
+  }, {
+    id: 3,
+    title: "Title 3",
+    description: "desc 3"
+  }])
 
-  function updateTitle() {
-    setTitle("my name is " + Math.random());
+  function addTodo () {
+    setTodos([...todos, {
+      id: counter++,
+      title: "Title 4",
+      description: "desc 4"
+    }])
   }
 
   return (
     <div>
-      <div>
-        <button onClick={updateTitle}>update the title</button> <br/>
-        <Header title={title}></Header>
-        <Header title="nisha2"></Header>
-        <Header title="nisha3"></Header>
-        <Header title="nisha4"></Header>
-        <Header title="nisha5"></Header>
-        <Header title="nisha6"></Header>
-      </div>
+      <button onClick={addTodo}>Add a todo</button>
+      {todos.map(todo => <Todo key={todo.id} title={todo.title} description={todo.description} />)}
     </div>
   )
 }
 
-const Header = React.memo(function Header({title}) {
+function Todo({title, description}) {
   return <div>
-    {title}
+    <h2>{title}</h2>
+    <h4>{description}</h4>
   </div>
-})
+}
 
 export default App
