@@ -1,44 +1,27 @@
 /* eslint-disable react/prop-types */
 
-
-import { useState } from "react"
-
-let counter = 4;
 function App() {
-  const [todos, setTodos] = useState([ {
-    id: 1, 
-    title: "Title 1",
-    description: "desc 1"
-  }, {
-    id: 2,
-    title: "Title 2",
-    description: "desc 2"
-  }, {
-    id: 3,
-    title: "Title 3",
-    description: "desc 3"
-  }])
-
-  function addTodo () {
-    setTodos([...todos, {
-      id: counter++,
-      title: "Title 4",
-      description: "desc 4"
-    }])
-  }
-
-  return (
-    <div>
-      <button onClick={addTodo}>Add a todo</button>
-      {todos.map(todo => <Todo key={todo.id} title={todo.title} description={todo.description} />)}
-    </div>
-  )
+  return <div>
+    <CardWrapper innerComponent={<TextComponent/>} />
+    <CardWrapper innerComponent={<TextComponent2/>} />
+  </div>;
 }
 
-function Todo({title, description}) {
+function CardWrapper({innerComponent}) {
+  return <div style={{border: "2px solid black", padding: 10}}>
+    {innerComponent}
+  </div>
+}
+
+function TextComponent() {
   return <div>
-    <h2>{title}</h2>
-    <h4>{description}</h4>
+    Text Component
+  </div>
+}
+
+function TextComponent2() {
+  return <div>
+    Text Component 2
   </div>
 }
 
