@@ -2,26 +2,28 @@
 
 function App() {
   return <div>
-    <CardWrapper innerComponent={<TextComponent/>} />
-    <CardWrapper innerComponent={<TextComponent2/>} />
+    
+    <CardWrapper>
+      <TextComponent/>
+    </CardWrapper>
+
+    <CardWrapper>
+      <div>
+        hello there
+      </div>
+    </CardWrapper>
   </div>;
 }
 
-function CardWrapper({innerComponent}) {
+function CardWrapper({children}) {
   return <div style={{border: "2px solid black", padding: 10}}>
-    {innerComponent}
+    {children}
   </div>
 }
 
 function TextComponent() {
   return <div>
-    Text Component
-  </div>
-}
-
-function TextComponent2() {
-  return <div>
-    Text Component 2
+    hi from text component
   </div>
 }
 
