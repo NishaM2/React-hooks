@@ -1,30 +1,30 @@
-/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react"
 
 function App() {
-  return <div>
-    
-    <CardWrapper>
-      <TextComponent/>
-    </CardWrapper>
+  const [todos, setTodos] = useState([]);
 
-    <CardWrapper>
-      <div>
-        hello there
-      </div>
-    </CardWrapper>
-  </div>;
+  useEffect(() => {
+    fetch("https://dummyjson.com/todos/random")
+      .then(async function (res) {
+        const json = await res.json();
+        setTodos([{ id: json.id, title: json.todo, description: "No description available" }]);
+      })
+  }, []);
+
+  return(
+    <>
+      {todos.map(todo => <Todo key={todo.id} title={todo.title} description={todo.description} />)}
+    </>
+  )
 }
 
-function CardWrapper({children}) {
-  return <div style={{border: "2px solid black", padding: 10}}>
-    {children}
+function Todo({ title, description }){
+  return <div>
+    <h1>{title}</h1>
+    {description}
   </div>
 }
 
-function TextComponent() {
-  return <div>
-    hi from text component
-  </div>
-}
+
 
 export default App
