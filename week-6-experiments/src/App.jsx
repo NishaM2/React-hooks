@@ -1,42 +1,22 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 function App() {
-  const [count, setCount] = useState(1);
-  return <div>
-    <button onClick={function() {
-      setCount(1);
-    }}>1</button>
+  const [counter, setCounter] = useState(0);
+  const [inputValue, setInputValue] = useState(1);
 
-    <button onClick={function() {
-      setCount(2);
-    }}>2</button>
-    
-    <button onClick={function() {
-      setCount(3);
-    }}>3</button>
-
-    <Todo id = {count} />
-  </div>
-}
-
-function Todo({id}) {
-  const [todo, setTodo] = useState([]);
-
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/todos?id=" + id)
-      .then(async function (res) {
-        const json = await res.json();
-        setTodo({ id: json[0].id, title: json[0].title, description: "No description available" });
-    })
-  }, [id])
+  let count = 0;
+  for (let i=1; i<=inputValue; i++) {
+    count += i;
+  }
 
   return <div>
-    <h1>
-      {todo.title}
-    </h1>
-    <h4>
-      {todo.description}
-    </h4>
+    <input onChange={function(e) {
+      setInputValue(e.target.value);
+    }}></input> <br/>
+
+    <p>Sum from 1 to {inputValue} is {count}</p> <br/>
+
+    <button onClick={() => setCounter(counter + 1)}>Counter {counter} </button>
   </div>
 }
 
